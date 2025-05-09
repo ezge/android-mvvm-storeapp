@@ -1,13 +1,12 @@
 package com.example.storeapp.presentation.payment
 
-package com.example.storeapp.presentation.payment
-
+import com.example.storeapp.data.model.response.PaymentHistoryItem
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.storeapp.domain.model.PaymentHistoryItem
+
 
 @Composable
 fun PaymentHistoryItemView(item: PaymentHistoryItem) {
