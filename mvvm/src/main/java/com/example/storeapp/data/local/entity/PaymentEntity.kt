@@ -13,6 +13,13 @@ data class PaymentEntity(
     val status: String
 )
 
-fun PaymentEntity.toDomain() = PaymentHistoryItem(transactionId, amount, date, status)
+fun PaymentEntity.toDomain(): PaymentHistoryItem {
+    return PaymentHistoryItem(
+        transactionId = id,
+        amount = amount,
+        date = date,
+        status = status
+    )
+}
 
-fun PaymentHistoryItem.toEntity() = PaymentEntity(transactionId, "", amount, date, status)
+

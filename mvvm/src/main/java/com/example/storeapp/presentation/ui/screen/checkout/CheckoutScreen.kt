@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.storeapp.domain.model.CartItem
+import com.example.storeapp.presentation.ui.screen.CheckoutViewModel
 
 @Composable
 fun CheckoutScreen(cartItems: List<CartItem>,

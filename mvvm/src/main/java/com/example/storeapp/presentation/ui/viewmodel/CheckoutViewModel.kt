@@ -1,4 +1,4 @@
-package com.example.storeapp.presentation.ui.screen.checkout
+package com.example.storeapp.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,15 +7,16 @@ import com.example.storeapp.domain.model.Order
 import com.example.storeapp.domain.usecase.CalculateTotalPriceUseCase
 import com.example.storeapp.domain.usecase.PlaceOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class CheckoutViewModel @Inject constructor(
     private val calculateTotalPriceUseCase: CalculateTotalPriceUseCase,
-    private val placeOrderUseCase: PlaceOrderUseCase) : ViewModel() {
+    private val placeOrderUseCase: PlaceOrderUseCase
+) : ViewModel() {
 
     private val _totalPrice = MutableStateFlow<Double>(0.0)
     val totalPrice: StateFlow<Double> = _totalPrice

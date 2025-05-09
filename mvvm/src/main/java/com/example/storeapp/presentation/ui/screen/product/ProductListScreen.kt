@@ -12,7 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import com.example.storeapp.domain.model.Product
-import com.example.storeapp.presentation.components.ProductCard
+import com.example.storeapp.presentation.component.ProductCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

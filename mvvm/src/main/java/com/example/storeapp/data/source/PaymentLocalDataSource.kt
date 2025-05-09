@@ -1,4 +1,4 @@
-package com.example.storeapp.data.local
+package com.example.storeapp.data.source
 
 import com.example.storeapp.data.model.response.PaymentHistoryItem
 

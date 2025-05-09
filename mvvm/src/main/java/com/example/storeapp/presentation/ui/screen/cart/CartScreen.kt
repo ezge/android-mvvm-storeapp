@@ -30,17 +30,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.storeapp.domain.model.CartItem
-import com.example.storeapp.domain.model.Product
-import com.example.storeapp.presentation.components.CartItemCard
+import com.example.storeapp.presentation.component.CartItemCard
 
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(cart: List<CartItem>,
-               onRemoveFromCart: (Int) -> Unit,
+               onRemoveFromCart: () -> Unit,
+               onClearCart: () -> Unit,
                onBack: () -> Unit,
-               onProceedToCheckout: () -> Unit) {
+               onProceedToCheckout: (List<CartItem>) -> Unit) {
+
+    val cartItems by cartViewModel.cartItems
 
     var totalPrice by remember { mutableDoubleStateOf(0.0) }
 
@@ -61,22 +63,17 @@ fun CartScreen(cart: List<CartItem>,
         }
     ) { padding ->
         if (cart.isEmpty()) {
-            Box(
-                Modifier.fillMaxSize().padding(padding),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("Your cart is empty")
-            }
-        } else {
+            Box(Modifier.fillMaxSize().padding(padding),
+                contentAlignment = Alignment.Center) {
+                    Text("Your cart is empty")
+                }}
+        else {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text("Cart", style = MaterialTheme.typography.titleLarge)
 
-                LazyColumn {
-                    items(cart.first().product.id) { item ->
-                        CartItemCard(item = cart.first(),
-                                     onRemoveFromCart = { onRemoveFromCart(item) })
-                    }
-                }
+                LazyColumn { items(cart) { item ->
+                    CartItemCard(item = item, onRemoveFromCart = { onRemoveFromCart(item.product.id) })
+                } }
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("Total: $${"%.2f".format(totalPrice)}")
@@ -86,15 +83,15 @@ fun CartScreen(cart: List<CartItem>,
                     horizontalArrangement = Arrangement.SpaceBetween) {
 
                     Button(modifier = Modifier.weight(1f).padding(start = 8.dp),
-                           onClick = { onRemoveFromCart(cart.all { it.id != -1 })},
+                           onClick = onClearCart,
                            enabled = cart.isNotEmpty()) {
                         Text("Remove All") }
                     Button(modifier = Modifier.weight(1f),
-                        onClick = { onBack() },
+                        onClick = onBack,
                         enabled = cart.isNotEmpty()) {
                         Text("Continue Shopping") }
                     Button(modifier = Modifier.weight(1f).padding(end = 8.dp),
-                           onClick = { onProceedToCheckout() },
+                           onClick = { onProceedToCheckout(cart) },
                            enabled = cart.isNotEmpty()) {
                         Text("Proceed to Checkout")
                     }

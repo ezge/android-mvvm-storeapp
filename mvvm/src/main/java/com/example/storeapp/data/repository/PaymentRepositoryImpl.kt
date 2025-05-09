@@ -3,7 +3,7 @@ package com.example.storeapp.data.repository
 import com.example.storeapp.data.model.request.PaymentRequest
 import com.example.storeapp.data.model.response.PaymentHistoryItem
 import com.example.storeapp.data.model.response.PaymentResponse
-import com.example.storeapp.data.remote.PaymentRemoteDataSource
+import com.example.storeapp.data.source.PaymentRemoteDataSource
 import com.example.storeapp.domain.repository.PaymentRepository
 
 class PaymentRepositoryImpl(
